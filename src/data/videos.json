@@ -1,0 +1,20 @@
+[
+	{
+		"id": "exclusive-clip",
+		"title": "Resident Evil - Exclusive Clip",
+		"videoId": "KGlapnJFacE",
+		"alt": "Fotograma del clip exclusivo de Resident Evil"
+	},
+	{
+		"id": "trailer-oficial",
+		"title": "Resident Evil - Tráiler Oficial",
+		"videoId": "8iKTeIV2xgE",
+		"alt": "Fotograma del tráiler oficial de Resident Evil"
+	},
+	{
+		"id": "trailer-teaser",
+		"title": "Resident Evil - Tráiler Teaser",
+		"videoId": "oV13lpkiJhI",
+		"alt": "Fotograma del tráiler teaser de Resident Evil"
+	}
+]

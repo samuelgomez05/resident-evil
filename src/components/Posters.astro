@@ -1,0 +1,32 @@
+---
+import imagesData from "../data/images.json";
+
+const posters = imagesData.posters;
+---
+
+<section class="relative bg-panel py-20 md:py-30 border-t border-line">
+  <div class="max-w-295 mx-auto px-7">
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
+    >
+      {
+        posters.map((poster, idx) => (
+          <div
+            class="group relative aspect-2/3 overflow-hidden bg-panel border border-line hover:border-blood-bright transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.85)]"
+          >
+            <img
+              src={poster.src}
+              alt={poster.alt || `Póster ${idx + 1} de Resident Evil`}
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+
+            <!-- Subtle Gradient & Crimson Glow Overlay -->
+            <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            <div class="absolute inset-0 border border-blood-bright/0 group-hover:border-blood-bright/70 transition-colors duration-300 pointer-events-none"></div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

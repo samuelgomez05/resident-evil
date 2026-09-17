@@ -1,0 +1,122 @@
+{
+  "posters": [
+    {
+      "id": "poster-1",
+      "src": "https://image.tmdb.org/t/p/original/11hEzVIwD3m2zWYiIFUcDeQFO6o.jpg",
+      "alt": "Póster oficial de Resident Evil 2026 en alta resolución"
+    },
+    {
+      "id": "poster-2",
+      "src": "https://image.tmdb.org/t/p/original/20e37PZKpDiB2fh6Rj12eaTdovE.jpg",
+      "alt": "Póster promocional alternativo de Resident Evil"
+    },
+    {
+      "id": "poster-3",
+      "src": "https://image.tmdb.org/t/p/original/AtuBBAzYOpFil0FAfopCd2zWTCW.jpg",
+      "alt": "Póster Teaser de Resident Evil — Solo en cines"
+    },
+    {
+      "id": "poster-4",
+      "src": "https://image.tmdb.org/t/p/original/d07Xk47MYElK4PNmbx7VYxpcnJm.jpg",
+      "alt": "Arte gráfico de Umbrella Corporation en Resident Evil"
+    },
+    {
+      "id": "poster-5",
+      "src": "https://image.tmdb.org/t/p/original/cZOWFziHgWuxA64ChDEVuoQLgtp.jpg",
+      "alt": "Póster cinematográfico de Resident Evil"
+    },
+    {
+      "id": "poster-6",
+      "src": "https://image.tmdb.org/t/p/original/pDtsANHzSKbKrQQ35Zl8wn4GE1c.jpg",
+      "alt": "Póster exclusivo para cines IMAX de Resident Evil"
+    },
+    {
+      "id": "poster-7",
+      "src": "https://image.tmdb.org/t/p/original/mfjjRR35nGFJLyIBdOeX5mAx540.jpg",
+      "alt": "Póster teaser promocional de Resident Evil 2026"
+    },
+    {
+      "id": "poster-8",
+      "src": "https://image.tmdb.org/t/p/original/9YzsMLLSpCbAiDiEXlwkZr3m5Ri.jpg",
+      "alt": "Póster de personaje en Resident Evil"
+    },
+    {
+      "id": "poster-9",
+      "src": "https://image.tmdb.org/t/p/original/leiznqtdsC4fy0uWJtnqaXW5XTh.jpg",
+      "alt": "Arte de concepto promocional de Resident Evil"
+    },
+    {
+      "id": "poster-10",
+      "src": "https://image.tmdb.org/t/p/original/1F0GZSioP1e8mRaaHeMdIUmMOEu.jpg",
+      "alt": "Póster final de lanzamiento de Resident Evil 2026"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gallery-11",
+      "src": "https://image.tmdb.org/t/p/original/lZ1UDcfJRfzqlmepKgHr6qUtxnk.jpg",
+      "alt": "Captura cinemática de contención fallida en Resident Evil"
+    },
+    {
+      "id": "gallery-2",
+      "src": "https://image.tmdb.org/t/p/original/xWORBFGvMUVmfvBrzKJNar3m5GB.jpg",
+      "alt": "Escena nocturna de evacuación en Raccoon City"
+    },
+    {
+      "id": "gallery-3",
+      
+      "src": "https://image.tmdb.org/t/p/original/qXlWN4Byqovzr5YybkjaWUpMxQt.jpg",
+      "alt": "Escena de tensión en las instalaciones subterráneas de Umbrella"
+    },
+    {
+      "id": "gallery-4",
+      "src": "https://image.tmdb.org/t/p/original/cYWsl79X79sXOXyceXoMJaKyoMn.jpg",
+      "alt": "Detalle de atmósfera de terror y criaturas en Resident Evil"
+    },
+    {
+      "id": "gallery-5",
+      "src": "https://image.tmdb.org/t/p/original/3h9MLGuKNTCNb0BeYMXmNIQBPba.jpg",
+      "alt": "Fotograma exclusivo del personaje principal en Resident Evil"
+    },
+    {
+      "id": "gallery-6",
+      "src": "https://image.tmdb.org/t/p/original/wEV9iTPIoiLfTkftCsrI23krsQA.jpg",
+      "alt": "Escena de acción y supervivencia en los pasillos de Praga"
+    },
+    {
+      "id": "gallery-7",
+      "src": "https://image.tmdb.org/t/p/original/d3HKRIO9qWSC4fHjKevVaFNfXMH.jpg",
+      "alt": "Fotograma de laboratorio científico de Umbrella Corporation"
+    },
+    {
+      "id": "gallery-8",
+      "src": "https://image.tmdb.org/t/p/original/fQpxJXfOm0QSHj3eB8QDjOvYL3t.jpg",
+      "alt": "Imagen promocional de producción rodada en Praga"
+    },
+    {
+      "id": "gallery-9",
+      "src": "https://image.tmdb.org/t/p/original/218sWumA1POLkMFxAd9rfPcWmjY.jpg",
+      "alt": "Fotograma del pasillo de la comisaría R.P.D. en Resident Evil"
+    },
+    {
+      "id": "gallery-10",
+      "src": "https://image.tmdb.org/t/p/original/mRM28tIIm8y0gKy9GKYGwotxuPM.jpg",
+      "alt": "Fotograma cinematográfico de supervivencia en Raccoon City"
+    },
+    {
+      "id": "gallery-11",
+      "src": "https://image.tmdb.org/t/p/original/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
+      "alt": "Fotograma de atmósfera de terror claustrofóbico de Resident Evil"
+    },
+    {
+      "id": "gallery-12",
+      "src": "https://image.tmdb.org/t/p/original/n9SBqkGttTmkHtoXiyuB1NOBV9v.jpg",
+      "alt": "Fotograma de atmósfera de terror claustrofóbico de Resident Evil"
+    },
+    {
+      "id": "gallery-13",
+      "src": "https://image.tmdb.org/t/p/original/phFsjtXnMvsZ0X5pUKVXCiVh131.jpg",
+      "alt": "Fotograma de atmósfera de terror claustrofóbico de Resident Evil"
+    }
+  ]
+}

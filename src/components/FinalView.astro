@@ -1,0 +1,34 @@
+---
+import BtnBuyTicket from "./BtnBuyTicket.astro";
+
+import logo from "../assets/resident_evil_2026.webp";
+import bgFooter from "../assets/background-footer.webp";
+---
+
+<section
+  class="mt-40 relative h-screen min-h-160 bg-position-[center_32%] bg-cover bg-no-repeat flex items-center justify-center mask-[linear-gradient(to_bottom,transparent_0%,black_25%,black_75%,transparent_100%)] before:content-[''] before:absolute before:inset-0 before:bg-linear-to-b before:from-[rgba(6,6,5,0.4)] before:via-[rgba(6,6,5,0.18)] before:to-[rgba(6,6,5,0.8)]"
+  style={`background-image: url('${bgFooter.src}');`}
+>
+  <div class="relative z-10 text-center px-6">
+    <div
+      class="relative inline-block p-2.5 before:content-[''] before:absolute before:inset-[-25%] before:bg-[radial-gradient(ellipse_at_center,rgba(6,6,5,0.8)_0%,rgba(6,6,5,0)_70%)] before:z-0 before:pointer-events-none"
+    >
+      <img
+        class="relative z-10 w-[min(520px,76vw)] mx-auto"
+        alt="Resident Evil — Logotipo Oficial"
+        src={logo.src}
+      />
+    </div>
+    <div
+      class="mt-6.5 font-display font-black text-[clamp(30px,5vw,54px)] text-ink"
+    >
+      17.09.<em class="not-italic text-blood-bright">26</em>
+    </div>
+    <p class="mt-1.5 text-[12px] tracking-[0.3em] text-paper uppercase">
+      Solo en cines
+    </p>
+    <div class="mt-7.5">
+      <BtnBuyTicket />
+    </div>
+  </div>
+</section>

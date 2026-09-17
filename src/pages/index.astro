@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Loader from "../components/Loader.astro";
+import BtnOpenTrailerModal from "../components/BtnOpenTrailerModal.astro";
+import Header from "../components/Header.astro";
+import HeroSection from "../components/HeroSection.astro";
+import Synopsis from "../components/Synopsis.astro";
+import Posters from "../components/Posters.astro";
+import Videos from "../components/Videos.astro";
+import Gallery from "../components/Gallery.astro";
+import FinalView from "../components/FinalView.astro";
+import VideoModal from "../components/modals/VideoModal.astro";
+import GalleryModal from "../components/modals/GalleryModal.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+  <Loader />
+  <Header />
+
+  <main>
+    <HeroSection />
+    <Synopsis />
+    <Posters />
+    <Videos />
+    <Gallery />
+    <FinalView />
+  </main>
+
+  <div class="fixed right-4 sm:right-7 bottom-4 sm:bottom-7 z-120">
+    <BtnOpenTrailerModal />
+  </div>
+  <VideoModal />
+  <GalleryModal />
+  <Footer />
+</Layout>

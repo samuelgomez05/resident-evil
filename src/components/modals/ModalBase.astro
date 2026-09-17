@@ -1,0 +1,140 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  id?: string;
+  titleId?: string;
+  title?: string;
+}
+
+const {
+  id = "dialogModal",
+  titleId = "titleModal",
+  title = "",
+} = Astro.props;
+---
+
+<dialog
+  id={id}
+  class="dialog-modal fixed inset-0 z-200 m-0 p-6 w-full h-full max-w-none max-h-none border-0 outline-none bg-transparent overflow-hidden"
+>
+  <div class="relative flex flex-col items-center justify-center w-full max-w-5xl my-auto">
+    <div
+      class="modal-box relative w-full bg-black border border-blood-bright shadow-[0_0_0_1px_rgba(0,0,0,0.4),0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(178,31,46,0.15)]"
+    >
+      <div
+        class="flex items-center justify-between p-4 border-b border-line text-xs tracking-[0.14em] text-ink"
+      >
+        <p id={titleId} class="uppercase">{title}</p>
+
+        <button
+          class="closeModal flex items-center justify-center bg-none border border-line text-ink w-8 h-8 cursor-pointer leading-none hover:bg-blood-bright hover:border-blood-bright transition-colors"
+          type="button"
+          aria-label="Cerrar"
+        >
+          <Icon name="tabler:x-filled" size={20} />
+        </button>
+      </div>
+
+      <slot />
+    </div>
+
+    <slot name="external" />
+  </div>
+</dialog>
+
+<script>
+  const dialogs = document.querySelectorAll<HTMLDialogElement>(".dialog-modal");
+
+  dialogs.forEach((dialog) => {
+    const closeModalButtons = dialog.querySelectorAll(".closeModal");
+    let isClosing = false;
+
+    function closeModal() {
+      if (!dialog || !dialog.open || isClosing) return;
+
+      isClosing = true;
+      dialog.classList.add("is-closing");
+
+      setTimeout(() => {
+        dialog.close();
+        dialog.classList.remove("is-closing");
+
+        isClosing = false;
+        document.body.style.overflow = "";
+      }, 280);
+    }
+
+    closeModalButtons.forEach((btn) => {
+      btn.addEventListener("click", closeModal);
+    });
+
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) {
+        closeModal();
+      }
+    });
+
+    dialog.addEventListener("cancel", (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+</script>
+
+<style>
+  dialog {
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  dialog[open] {
+    display: flex;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(6, 6, 5, 0.86);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  dialog.is-closing::backdrop {
+    opacity: 0;
+  }
+
+  dialog .modal-box {
+    transform: translateY(-10px) scale(0.94);
+    opacity: 0;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  dialog[open] .modal-box {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  dialog.is-closing .modal-box {
+    transform: translateY(-10px) scale(0.94);
+    opacity: 0;
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+
+    dialog[open] .modal-box {
+      transform: translateY(-10px) scale(0.94);
+      opacity: 0;
+    }
+  }
+</style>

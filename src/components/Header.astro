@@ -1,0 +1,16 @@
+---
+import BtnBuyTicket from "./BtnBuyTicket.astro";
+
+import logo from "../assets/resident_evil_2026.webp";
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-120 flex items-center justify-between p-4 sm:px-7 sm:py-5"
+>
+  <img
+    class="h-5.5 sm:h-8 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]"
+    alt="Resident Evil — Logotipo Oficial"
+    src={logo.src}
+  />
+  <BtnBuyTicket />
+</header>

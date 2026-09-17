@@ -1,0 +1,88 @@
+---
+import Modal from "./ModalBase.astro";
+---
+
+<Modal id="videoModalDialog" titleId="titleVideoModal">
+  <div class="relative w-full aspect-video bg-black overflow-hidden">
+    <iframe
+      id="iframeVideoModal"
+      class="absolute inset-0 w-full h-full border-0 block"
+      src=""
+      title=""
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    >
+    </iframe>
+  </div>
+</Modal>
+
+<script>
+  import videos from "../../data/videos.json";
+
+  const dialog = document.getElementById(
+    "videoModalDialog",
+  ) as HTMLDialogElement | null;
+  const iframe = document.getElementById(
+    "iframeVideoModal",
+  ) as HTMLIFrameElement | null;
+
+  const titleModal = document.getElementById("titleVideoModal");
+  const openModalButtons = document.querySelectorAll(".open-modal");
+  const closeModalButton = dialog?.querySelector(".closeModal");
+
+  openModalButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const trailerId = btn.getAttribute("data-trailer-open");
+
+      if (!trailerId) return;
+
+      const video = videos.find((video) => video.id === trailerId);
+
+      if (!video) {
+        console.error(`No se encontró el video: ${trailerId}`);
+        return;
+      }
+
+      if (iframe) {
+        iframe.src =
+          "https://www.youtube-nocookie.com/embed/" +
+          video.videoId +
+          "?autoplay=1&rel=0&playsinline=1";
+
+        iframe.title = video.title;
+      }
+
+      if (titleModal) {
+        titleModal.textContent = video.title;
+      }
+
+      if (dialog && !dialog.open) {
+        dialog.classList.remove("is-closing");
+        dialog.showModal();
+        document.body.style.overflow = "hidden";
+      }
+    });
+  });
+
+  function clearVideo() {
+    if (iframe) {
+      iframe.src = "";
+      iframe.title = "";
+    }
+  }
+
+  if (closeModalButton) {
+    closeModalButton.addEventListener("click", clearVideo);
+  }
+
+  if (dialog) {
+    dialog.addEventListener("cancel", clearVideo);
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) {
+        clearVideo();
+      }
+    });
+  }
+</script>

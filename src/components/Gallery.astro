@@ -1,0 +1,196 @@
+---
+import { Icon } from "astro-icon/components";
+import imagesData from "../data/images.json";
+
+const gallery = imagesData.gallery;
+// First 3 images for normal cards, 4th image used as background for "Ver más"
+const displayItems = gallery.slice(0, 3);
+const fourthItem = gallery[3];
+---
+
+<section class="gallery-pin relative h-[350vh]" id="galleryPin">
+  <div
+    class="gallery-sticky sticky top-0 min-h-screen w-full overflow-hidden bg-void flex flex-col justify-between py-40 pb-20 select-none gap-12"
+  >
+    <!-- Section Header -->
+    <div class="px-6 sm:px-12 md:px-16 max-w-7xl mx-auto w-full flex-none">
+      <h2
+        class="font-display font-black text-[clamp(32px,5.5vw,64px)] tracking-tight uppercase text-ink leading-none"
+      >
+        Galería
+      </h2>
+    </div>
+
+    <!-- Horizontal Track Container -->
+    <div class="w-full overflow-hidden my-auto">
+      <div
+        id="galleryTrack"
+        class="flex gap-6 sm:gap-10 px-6 sm:px-12 md:px-16 will-change-transform items-center"
+      >
+        <!-- First 3 Gallery Cards -->
+        {
+          displayItems.map((item, idx) => (
+            <div
+              class="gallery-card open-gallery-modal group relative flex-none w-[84vw] sm:w-145 md:w-175 lg:w-205 aspect-video bg-panel border border-line hover:border-ink transition-all duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.9)] cursor-pointer"
+              data-gallery-index={idx}
+              role="button"
+              tabindex="0"
+              aria-label={`Ver imagen ${idx + 1}`}
+            >
+              <!-- Gallery Image -->
+              <img
+                src={item.src}
+                alt={item.alt}
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                loading="lazy"
+              />
+
+              <!-- Dark Gradients Overlay -->
+              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/40 transition-opacity duration-300"></div>
+              <div class="absolute inset-0 border-2 border-ink/0 group-hover:border-ink/60 transition-colors duration-300 pointer-events-none"></div>
+
+              <!-- Top-Right White Button with Plus Icon -->
+              <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-10">
+                <button
+                  type="button"
+                  class="open-gallery-modal flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-ink group-hover:bg-white text-void border border-ink transition-all duration-300 shadow-[0_0_20px_rgba(239,236,226,0.35)] group-hover:scale-110 cursor-pointer rounded-none"
+                  data-gallery-index={idx}
+                  aria-label="Ampliar imagen"
+                >
+                  <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-current flex items-center justify-center text-[9px] flex-none">
+                    <Icon name="tabler:plus" size={14} class="text-current stroke-[2.5]" />
+                  </span>
+                </button>
+              </div>
+            </div>
+          ))
+        }
+
+        <!-- 4th Card: "Ver más" -->
+        {
+          fourthItem && (
+            <div
+              class="gallery-card open-gallery-modal group relative flex-none w-[84vw] sm:w-145 md:w-175 lg:w-205 aspect-video bg-panel border border-line hover:border-ink transition-all duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.9)] cursor-pointer"
+              data-gallery-index={3}
+              role="button"
+              tabindex="0"
+              aria-label="Ver más imágenes de la galería"
+            >
+              <!-- 4th Image Background -->
+              <img
+                src={fourthItem.src}
+                alt={fourthItem.alt}
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-40 contrast-125"
+                loading="lazy"
+              />
+
+              <!-- Dark Overlay with "Ver más" Text -->
+              <div class="absolute inset-0 bg-black/65 backdrop-blur-[2px] group-hover:bg-black/55 transition-all duration-300 flex flex-col items-center justify-center gap-2">
+                <span class="font-display font-black text-3xl sm:text-5xl text-ink uppercase tracking-wider group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                  + Ver más
+                </span>
+                <span class="font-mono text-xs text-paper/80 tracking-widest uppercase">
+                  Ver todas las imágenes
+                </span>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="px-6 sm:px-12 md:px-16 max-w-7xl mx-auto w-full flex-none pt-2">
+      <div class="flex items-center justify-between gap-6 sm:gap-10">
+        <!-- Thin Progress Bar Line -->
+        <div class="flex-1 h-0.5 bg-line relative overflow-hidden">
+          <div
+            id="galleryProgressBar"
+            class="h-full bg-ink w-0 shadow-[0_0_10px_rgba(239,236,226,0.5)]"
+          ></div>
+        </div>
+
+        <!-- Index Counter (Hidden on mobile, visible on sm+) -->
+        <div class="hidden sm:flex font-mono text-[11px] tracking-widest text-ink uppercase items-center gap-1 flex-none">
+          <span id="galleryCurrentIdx" class="text-ink font-bold">01</span>
+          <span class="text-paper/40">/</span>
+          <span class="text-paper/70">{gallery.length < 10 ? `0${gallery.length}` : gallery.length}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const galleryPin = document.getElementById("galleryPin");
+  const galleryTrack = document.getElementById("galleryTrack");
+  const galleryProgressBar = document.getElementById("galleryProgressBar");
+  const galleryCurrentIdx = document.getElementById("galleryCurrentIdx");
+
+  let targetX = 0;
+  let currentX = 0;
+  let isRunning = false;
+
+  function updateTarget() {
+    if (!galleryPin || !galleryTrack) return;
+
+    const rect = galleryPin.getBoundingClientRect();
+    const totalScrollable = galleryPin.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+
+    const scrolled = -rect.top;
+    const rawProgress = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+
+    const trackWidth = galleryTrack.scrollWidth;
+    const viewportWidth = window.innerWidth;
+    const maxTranslateX = Math.max(0, trackWidth - viewportWidth + 120);
+
+    targetX = rawProgress * maxTranslateX;
+
+    if (!isRunning) {
+      isRunning = true;
+      requestAnimationFrame(animate);
+    }
+  }
+
+  function animate() {
+    const diff = targetX - currentX;
+    currentX += diff * 0.07;
+
+    if (galleryTrack) {
+      galleryTrack.style.transform = `translate3d(-${currentX.toFixed(2)}px, 0, 0)`;
+    }
+
+    if (galleryPin) {
+      const trackWidth = galleryTrack ? galleryTrack.scrollWidth : 1;
+      const viewportWidth = window.innerWidth;
+      const maxTranslateX = Math.max(1, trackWidth - viewportWidth + 120);
+      const progressRatio = Math.min(Math.max(currentX / maxTranslateX, 0), 1);
+
+      if (galleryProgressBar) {
+        galleryProgressBar.style.width = `${(progressRatio * 100).toFixed(2)}%`;
+      }
+
+      if (galleryCurrentIdx) {
+        const totalItems = 4;
+        const currentNum = Math.min(Math.floor(progressRatio * totalItems) + 1, totalItems);
+        const formattedNum = currentNum < 10 ? `0${currentNum}` : `${currentNum}`;
+        galleryCurrentIdx.textContent = formattedNum;
+      }
+    }
+
+    if (Math.abs(diff) > 0.05) {
+      requestAnimationFrame(animate);
+    } else {
+      currentX = targetX;
+      if (galleryTrack) {
+        galleryTrack.style.transform = `translate3d(-${currentX}px, 0, 0)`;
+      }
+      isRunning = false;
+    }
+  }
+
+  window.addEventListener("scroll", updateTarget, { passive: true });
+  window.addEventListener("resize", updateTarget);
+  updateTarget();
+</script>

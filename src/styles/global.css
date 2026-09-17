@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #0a0a09;
+  --color-panel: #151412;
+  --color-panel-2: #1d1b17;
+  --color-paper: #cdc8b8;
+  --color-ink: #efece2;
+  --color-ink-dim: #948f80;
+  --color-blood: #7c1420;
+  --color-blood-bright: #b21f2e;
+  --color-blood-hover: #c72a3a;
+  --color-hazard: #b6903a;
+  --color-line: rgba(239, 236, 226, 0.14);
+  
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-display: 'Big Shoulders Display', sans-serif;
+}
+
+:root {
+  --reveal: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-blood-bright);
+  color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-blood-bright);
+  border: 2px solid var(--color-void);
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2.5 px-4.5 sm:px-6 py-3 sm:py-3.5 text-[10px] sm:text-[11px] tracking-[0.16em] uppercase border border-ink text-ink no-underline bg-[rgba(10,10,9,0.45)] backdrop-blur-md cursor-pointer transition-all duration-200 hover:-translate-y-0.75 hover:shadow-[0_14px_28px_rgba(0,0,0,0.4)];
+  }
+
+  .btn.primary {
+    @apply bg-blood-bright border-blood-bright hover:bg-blood-hover hover:border-blood-hover hover:text-white;
+  }
+
+  .btn.ghost:hover {
+    @apply bg-ink text-void;
+  }
+
+  .btn .ring {
+    @apply w-4.5 h-4.5 rounded-full border border-current flex items-center justify-center text-[8px] flex-none;
+  }
+}
+
+.wrap {
+  @apply max-w-295 mx-auto px-7;
+}
+
+.section-pad {
+  @apply py-22 md:py-32.5;
+}
